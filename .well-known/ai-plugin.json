@@ -1,9 +1,9 @@
 {
   "schema_version": "v1",
-  "name_for_human": "NBA Statistics API (no auth)",
+  "name_for_human": "NBA Stats API (no auth)",
   "name_for_model": "nba",
-  "description_for_human": "Plugin for retrieving NBA statistics, including today's scoreboard and player information.",
-  "description_for_model": "Plugin for retrieving NBA statistics, including today's scoreboard and player information.",
+  "description_for_human": "Plugin for retrieving NBA data & statistics, including today's scoreboard and player information.",
+  "description_for_model": "Plugin for retrieving NBA data & statistics, including today's scoreboard and player information.",
   "auth": {
     "type": "none"
   },

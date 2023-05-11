@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: NBA Statistics API
-  description: An API that retrieves NBA statistics, including the current scoreboard and player information.
+  title: NBA Stats API
+  description: An API that retrieves NBA data & statistics, including the current scoreboard and player information.
   version: 'v1'
 servers:
   - url: http://localhost:5003
