@@ -1,6 +1,8 @@
-# ChatGPT plugins quickstart
+# ChatGPT NBA Stats API Plugin
 
-Get a todo list ChatGPT plugin up and running in under 5 minutes using Python. If you do not already have plugin developer access, please [join the waitlist](https://openai.com/waitlist/plugins).
+This plugin is an experiment using the NBA's APIs to make their data & statistics easily accessible in ChatGPT.  This plugin is currently only available for local install & use, but I am open to the option of hosting the API for public availability. Open to feedback, issues, and pull requests (create an issue first for discussion). 
+
+Built with the [nba_api](https://github.com/swar/nba_api) client to access NBA APIs.  
 
 ## Setup
 
@@ -24,8 +26,10 @@ Once the local server is running:
 4. Select "Develop your own plugin"
 5. Enter in `localhost:5003` since this is the URL the server is running on locally, then select "Find manifest file".
 
-The plugin should now be installed and enabled! You can start with a question like "What is on my todo list" and then try adding something to it as well! 
+Start asking a question relevant to the plugin, like "Is Raymond Felton still active in the NBA?", or "Get me today's games."
 
-## Getting help
-
-If you run into issues or have questions building a plugin, please join our [Developer community forum](https://community.openai.com/c/chat-plugins/20).
+## Endpoints
+- `/scoreboard`: Get today's scheduled NBA games.  Returns results in the format below: 
+  - `{gameId}: {awayTeam} vs. {homeTeam} @ {gameTimeLTZ}`
+  - Example: `Celtics vs. 76ers at 7:30 PM Eastern Time`
+- `/player/:player_name`: Returns basic information about the requested player, notably if they are active or not.
