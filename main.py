@@ -4,31 +4,30 @@ import quart
 import quart_cors
 from quart import request
 
+from datetime import timezone
+from dateutil import parser
+from nba_api.live.nba.endpoints import scoreboard
+
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
 
-# Keep track of todo's. Does not persist if Python session is restarted.
-_TODOS = {}
+@app.get("/scoreboard")
+async def get_scoreboard():
+    f = "{gameId}: {awayTeam} vs. {homeTeam} @ {gameTimeLTZ}" 
+    board = scoreboard.ScoreBoard()
+    print("ScoreBoardDate: " + board.score_board_date)
+    games = board.games.get_dict()
+    data = []
+    for game in games:
+        gameTimeLTZ = parser.parse(game["gameTimeUTC"]).replace(tzinfo=timezone.utc).astimezone(tz=None)
+        data.append(f.format(gameId=game["gameId"], awayTeam=game["awayTeam"]["teamName"], homeTeam=game["homeTeam"]["teamName"], gameTimeLTZ=gameTimeLTZ))
+    return quart.Response(response=json.dumps(data), status=200)
 
-@app.post("/todos/<string:username>")
-async def add_todo(username):
-    request = await quart.request.get_json(force=True)
-    if username not in _TODOS:
-        _TODOS[username] = []
-    _TODOS[username].append(request["todo"])
-    return quart.Response(response='OK', status=200)
-
-@app.get("/todos/<string:username>")
-async def get_todos(username):
-    return quart.Response(response=json.dumps(_TODOS.get(username, [])), status=200)
-
-@app.delete("/todos/<string:username>")
-async def delete_todo(username):
-    request = await quart.request.get_json(force=True)
-    todo_idx = request["todo_idx"]
-    # fail silently, it's a simple plugin
-    if 0 <= todo_idx < len(_TODOS[username]):
-        _TODOS[username].pop(todo_idx)
-    return quart.Response(response='OK', status=200)
+@app.get("/player/<string:player_name>")
+async def get_player(player_name):
+    from nba_api.stats.static import players
+    nba_players = players.get_players()
+    player = [player for player in nba_players if player['full_name'] == player_name][0]
+    return quart.Response(response=json.dumps(player), status=200)
 
 @app.get("/logo.png")
 async def plugin_logo():

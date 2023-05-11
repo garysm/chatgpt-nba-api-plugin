@@ -1,93 +1,57 @@
 openapi: 3.0.1
 info:
-  title: TODO Plugin
-  description: A plugin that allows the user to create and manage a TODO list using ChatGPT. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
+  title: NBA Statistics API
+  description: An API that retrieves NBA statistics, including the current scoreboard and player information.
   version: 'v1'
 servers:
   - url: http://localhost:5003
 paths:
-  /todos/{username}:
+  /scoreboard:
     get:
-      operationId: getTodos
-      summary: Get the list of todos
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
+      operationId: getScoreboard
+      summary: Get today's scoreboard
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getTodosResponse'
-    post:
-      operationId: addTodo
-      summary: Add a todo to the list
+                $ref: '#/components/schemas/ScoreboardResponse'
+  /player/{player_name}:
+    get:
+      operationId: getPlayer
+      summary: Get player information
       parameters:
-      - in: path
-        name: username
-        schema:
+        - in: path
+          name: player_name
+          schema:
             type: string
-        required: true
-        description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/addTodoRequest'
+          required: true
+          description: The full name of the player.
       responses:
         "200":
           description: OK
-    delete:
-      operationId: deleteTodo
-      summary: Delete a todo from the list
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/deleteTodoRequest'
-      responses:
-        "200":
-          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerResponse'
 
 components:
   schemas:
-    getTodosResponse:
+    ScoreboardResponse:
+      type: array
+      items:
+        type: string
+    PlayerResponse:
       type: object
       properties:
-        todos:
-          type: array
-          items:
-            type: string
-          description: The list of todos.
-    addTodoRequest:
-      type: object
-      required:
-      - todo
-      properties:
-        todo:
-          type: string
-          description: The todo to add to the list.
-          required: true
-    deleteTodoRequest:
-      type: object
-      required:
-      - todo_idx
-      properties:
-        todo_idx:
+        id:
           type: integer
-          description: The index of the todo to delete.
-          required: true
+        full_name:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        isActive:
+          type: boolean
