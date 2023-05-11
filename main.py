@@ -2,8 +2,8 @@ import json
 
 import quart
 import quart_cors
-from quart import request
 
+from quart import request
 from datetime import timezone
 from dateutil import parser
 from nba_api.live.nba.endpoints import scoreboard
