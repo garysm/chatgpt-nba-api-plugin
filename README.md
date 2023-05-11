@@ -4,6 +4,11 @@ This plugin is an experiment using the NBA's APIs to make their data & statistic
 
 Built with the [nba_api](https://github.com/swar/nba_api) client to access NBA APIs.  
 
+
+![Scoreboard Screenshot](/examples/screenshots/scoreboard.png)
+
+![Player Screenshot](/examples/screenshots/player.png)
+
 ## Setup
 
 To install the required packages for this plugin, run the following command:
