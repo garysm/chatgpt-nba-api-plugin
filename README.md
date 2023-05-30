@@ -1,9 +1,8 @@
 # ChatGPT NBA Stats API Plugin
 
-This plugin is an experiment using the NBA's APIs to make their data & statistics easily accessible in ChatGPT.  This plugin is currently only available for local install & use, but I am open to the option of hosting the API for public availability. Open to feedback, issues, and pull requests. 
+This plugin is an experiment using the NBA's APIs to make their data & statistics easily accessible in ChatGPT.
 
 Built with the [nba_api](https://github.com/swar/nba_api) client to access NBA APIs.  
-
 
 ![Scoreboard Screenshot](/examples/screenshots/scoreboard.png)
 
